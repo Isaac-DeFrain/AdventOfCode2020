@@ -30,3 +30,4 @@
    odoc
    ocamlformat
  ))
+(using menhir 2.0)

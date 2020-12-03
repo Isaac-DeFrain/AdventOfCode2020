@@ -1,0 +1,4 @@
+(library
+  (name types)
+  (public_name puzzle2_lib.types)
+  (libraries core))

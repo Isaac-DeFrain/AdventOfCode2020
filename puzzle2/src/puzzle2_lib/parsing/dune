@@ -1,0 +1,9 @@
+(library
+ (name parsing)
+ (public_name puzzle2_lib.parsing)
+ (libraries core puzzle2_lib.types))
+
+(ocamllex lexer)
+
+(menhir
+  (modules parser))
