@@ -4,12 +4,7 @@
   (name puzzle1_lib)
   (public_name puzzle1_lib)
   (wrapped true)
-  (libraries  )
-  
-  
-  )
-
+  (libraries core parsing))
 
 (documentation
   (package puzzle1_lib))
-
