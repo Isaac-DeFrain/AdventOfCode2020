@@ -1,4 +1,3 @@
-/puzzle1
 *~
 _build
 .merlin
@@ -6,3 +5,4 @@ _build
 /_drom
 /_opam
 /_build
+.drom

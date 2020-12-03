@@ -1,0 +1,5 @@
+kind = "program"
+name = "puzzle2"
+skeleton = "driver"
+[dependencies]
+puzzle2_lib = "version"
