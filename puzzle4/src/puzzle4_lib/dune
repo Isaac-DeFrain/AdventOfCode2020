@@ -2,7 +2,7 @@
   (name puzzle4_lib)
   (public_name puzzle4_lib)
   (wrapped true)
-  (libraries  ))
+  (libraries core))
 
 (documentation
   (package puzzle4_lib))
