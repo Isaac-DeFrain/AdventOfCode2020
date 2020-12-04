@@ -1,0 +1,4 @@
+(library
+  (name processing)
+  (public_name puzzle3_lib.processing)
+  (libraries core))

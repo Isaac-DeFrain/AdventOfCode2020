@@ -10,5 +10,6 @@
 (*                                                                        *)
 (**************************************************************************)
 
+let () = print_endline "Puzzle 3"
 
-let () = Puzzle3_lib.Main.main ()
+let () = Puzzle3_lib.Main.solutions ()
