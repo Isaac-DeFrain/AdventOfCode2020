@@ -1,0 +1,8 @@
+
+{1 Library puzzle4_lib}
+
+This is the description
+of the puzzle4 OCaml project
+
+
+The entry point of this library is the module: {!Puzzle4_lib}.
