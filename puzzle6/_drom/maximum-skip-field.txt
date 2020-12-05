@@ -1,0 +1,1 @@
+skip = "puzzle6_lib.opam src/puzzle6_lib/index.mld src/puzzle6_lib/version.ml puzzle6.opam src/puzzle6/index.mld dune-project"
