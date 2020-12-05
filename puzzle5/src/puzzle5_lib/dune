@@ -1,0 +1,8 @@
+(library
+  (name puzzle5_lib)
+  (public_name puzzle5_lib)
+  (wrapped true)
+  (libraries core))
+
+(documentation
+  (package puzzle5_lib))

@@ -1,0 +1,8 @@
+(executable
+  (name main)
+  (public_name puzzle5)
+  (package puzzle5)
+  (libraries puzzle5_lib))
+
+(documentation
+  (package puzzle5))
