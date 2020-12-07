@@ -1,0 +1,8 @@
+(library
+  (name puzzle7_lib)
+  (public_name puzzle7_lib)
+  (wrapped true)
+  (libraries core))
+
+(documentation
+  (package puzzle7_lib))

@@ -1,0 +1,4 @@
+gen-version = "version.ml"
+kind = "library"
+name = "puzzle7_lib"
+skeleton = "library"

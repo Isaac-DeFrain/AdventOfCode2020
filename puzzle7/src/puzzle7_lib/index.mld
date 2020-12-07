@@ -1,0 +1,8 @@
+
+{1 Library puzzle7_lib}
+
+This is the description
+of the puzzle7 OCaml project
+
+
+The entry point of this library is the module: {!Puzzle7_lib}.
