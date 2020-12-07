@@ -10,7 +10,9 @@
 (*                                                                        *)
 (**************************************************************************)
 
-let yeses = ref ([] : string list list)
+let yeses_pt1 = ref ([] : int list)
+
+let yeses_pt2 = ref ([] : int list)
 
 let drop_while f = Core.List.drop_while ~f
 
@@ -35,16 +37,34 @@ let explode s =
    let chars = List.map (String.get s) (0 -- len) in
    List.map Char.escaped chars
 
+module StrSet = Set.Make(String)
+
+type part = Pt1 | Pt2
+
 let rec parse_file filename =
    let open Core.In_channel in
    let inx = create filename in
    let ls = input_lines inx in
-   yeses := process ls ;
+   yeses_pt1 := process Pt1 ls ;
+   yeses_pt2 := process Pt2 ls ;
    close inx
 
-and process ls =
-   groups ls |> List.map (List.map explode)
-   |> List.map List.concat |> List.map dedup_and_sort
+and process part ls =
+   match part with
+   | Pt1 ->
+      groups ls |> List.map (List.map explode)
+      |> List.map List.concat |> List.map dedup_and_sort
+      |> List.map List.length
+   | Pt2 ->
+      let open Char in
+      let all =
+         StrSet.of_list (List.map Char.chr (code 'a' -- (code 'z' + 1))
+         |> List.map Char.escaped)
+      in
+      groups ls |> List.map (List.map explode)
+      |> List.map (List.map StrSet.of_list)
+      |> List.map (List.fold_left StrSet.inter all)
+      |> List.map StrSet.cardinal
 
 and groups = function
    | [] -> []
@@ -56,9 +76,10 @@ and groups = function
       in
       next :: groups rem
 
-let solution_pt1 ys = List.map List.length ys |> List.fold_left ( + ) 0
+let solution = List.fold_left ( + ) 0
 
 let main () =
-   Printf.printf "Puzzle 6:\n" ;
+   Printf.printf "~~~ Puzzle 6 ~~~\n" ;
    parse_file "test/puzzle6.input" ;
-   Printf.printf "Pt1 solution: %d\n" (solution_pt1 !yeses)
+   Printf.printf "Pt1 solution: %d\n" (solution !yeses_pt1) ;
+   Printf.printf "Pt2 solution: %d\n" (solution !yeses_pt2)
