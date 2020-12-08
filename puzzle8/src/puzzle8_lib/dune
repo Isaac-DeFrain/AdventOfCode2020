@@ -1,0 +1,8 @@
+(library
+  (name puzzle8_lib)
+  (public_name puzzle8_lib)
+  (wrapped true)
+  (libraries core))
+
+(documentation
+  (package puzzle8_lib))
