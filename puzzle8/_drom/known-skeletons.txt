@@ -1,0 +1,2 @@
+project skeletons: library program virtual
+package skeletons: driver library program virtual
