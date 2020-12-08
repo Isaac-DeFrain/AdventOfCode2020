@@ -68,8 +68,17 @@ let count_contains b =
    aux [] [b] |> List.filter ((<>) b)
    |> Core.List.dedup_and_sort ~compare |> List.length
 
+(* part 2 *)
+let count_bags_within b =
+   let rec count (n, b') =
+      let within = List.assoc b' !req in
+      let sum_count = List.fold_left (+) 0 (List.map (fun x -> count x) within) in
+      n + n * sum_count
+   in
+   count (1, b) - 1
+
 let main () =
    Printf.printf "~~~ Puzzle 7 ~~~\n" ;
    parse_file "test/puzzle7.input" ;
    Printf.printf "Pt1 solution: %d\n" (count_contains (Bag ("shiny", "gold"))) ;
-   ()
+   Printf.printf "Pt2 solution: %d\n" (count_bags_within (Bag ("shiny", "gold")))
