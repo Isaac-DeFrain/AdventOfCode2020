@@ -10,6 +10,66 @@
 (*                                                                        *)
 (**************************************************************************)
 
+(* Bag (quality, string) *)
+type bag = Bag of string * string
+
+let req = ref ([] : (bag * (int * bag) list) list)
+
+let drop_while f = Core.List.drop_while ~f
+let take_while f = Core.List.take_while ~f
+
+let color (Bag (_, c)) = c
+
+let rec drop n l =
+   if n <= 0 then l
+   else match l with
+   | [] -> []
+   | _::tl -> drop (n - 1) tl
+
+let rec parse_file filename =
+   let open Core.In_channel in
+   let inx = create filename in
+   let ls = input_lines inx in
+   req := List.map process_bag ls ;
+   close inx
+
+and process_bag s =
+   let words s = String.split_on_char ' ' s in
+   let q = List.nth (words s) 0 in
+   let c = List.nth (words s) 1 in
+   let contents =
+      drop 4 (words s) |> String.concat " "
+      |> String.split_on_char ',' |> List.map String.trim |> List.map words
+   in
+   Bag (q, c), process_bags contents
+
+and process_bags = function
+   | [] -> []
+   | ("no"::_)::_ -> []
+   | (n::q::c::_)::tl -> (int_of_string n, Bag (q, c)) :: process_bags tl
+   | _ -> assert false
+
+let fst (a, _) = a
+let snd (_, b) = b
+
+let check_contains_bag b =
+   let bag_contains b (b', _) = List.assoc b' !req |> List.map snd |> List.mem b in
+   List.filter (bag_contains b) !req |> List.map fst |> List.sort_uniq compare
+
+let count_contains b =
+   let sort = List.sort_uniq compare in
+   let rec aux acc bs =
+      let bags = List.map check_contains_bag (acc @ bs |> sort) |> List.concat in
+      let accbags = bags @ acc @ bs |> sort in
+      if List.for_all (fun x -> List.mem x (acc @ bs)) accbags
+      then acc
+      else aux accbags accbags
+   in
+   aux [] [b] |> List.filter ((<>) b)
+   |> Core.List.dedup_and_sort ~compare |> List.length
+
 let main () =
    Printf.printf "~~~ Puzzle 7 ~~~\n" ;
+   parse_file "test/puzzle7.input" ;
+   Printf.printf "Pt1 solution: %d\n" (count_contains (Bag ("shiny", "gold"))) ;
    ()
