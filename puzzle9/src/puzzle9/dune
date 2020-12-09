@@ -1,0 +1,8 @@
+(executable
+  (name main)
+  (public_name puzzle9)
+  (package puzzle9)
+  (libraries puzzle9_lib))
+
+(documentation
+  (package puzzle9))

@@ -1,0 +1,5 @@
+kind = "program"
+name = "puzzle9"
+skeleton = "driver"
+[dependencies]
+puzzle9_lib = "version"
